@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class ReadDataFromJson {
     public void createJsonReader() {
+
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", "Bommu");
         jsonObject.put("mail", "tanuja@gmail.com");

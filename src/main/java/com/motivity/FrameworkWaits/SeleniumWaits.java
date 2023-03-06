@@ -1,4 +1,4 @@
-package com.motivity.BasePage;
+package com.motivity.FrameworkWaits;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,10 +7,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class WaitsPage {
+public class SeleniumWaits {
    WebDriverWait webDriverWait;
 
-    public WaitsPage(WebDriver driver)
+    public SeleniumWaits(WebDriver driver)
     {
         webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }

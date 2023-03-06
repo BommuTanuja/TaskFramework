@@ -1,6 +1,6 @@
 package com.motivity.Pages;
 
-import com.motivity.BasePage.ActionsPage;
+import com.motivity.FrameworkActions.SeleniumActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -9,11 +9,11 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
     WebDriver driver;
-    ActionsPage actionsPage;
+    SeleniumActions seleniumActions;
     public HomePage(WebDriver driver){
         PageFactory.initElements(driver, this);
         this.driver = driver;
-        actionsPage = new ActionsPage(driver);
+        seleniumActions = new SeleniumActions(driver);
 
     }
 
@@ -30,19 +30,21 @@ public class HomePage {
 
 
     public void clickOnGear(){
-        actionsPage.moveToElement(gearButton);
-        actionsPage.clickOnElement(bagsButton);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(gearButton).click().build().perform();
+        seleniumActions.clickOnElement(bagsButton);
 
     }
-    public void  verificationofCart(){
+    public void  verificationOfCart(){
 
-        actionsPage.clickOnElement(cartButton);
+        seleniumActions.clickOnElement(cartButton);
     }
-    public String getTheCartText(){
+    public String getTheCartText()
+    {
         return emptyCart.getText();
     }
     public void closeTheCart()  {
-        actionsPage.clickOnElement(cartCloseButton);
+        seleniumActions.clickOnElement(cartCloseButton);
 
     }
 

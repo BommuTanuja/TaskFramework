@@ -1,9 +1,8 @@
 package com.motivity.Pages;
 
 
-import com.motivity.BasePage.ActionsPage;
+import com.motivity.FrameworkActions.SeleniumActions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,13 +14,13 @@ import java.util.List;
 
 public class AddingPricePage {
     WebDriver driver;
-    ActionsPage actionsPage;
+    SeleniumActions seleniumActions;
 
 
     public AddingPricePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
-        actionsPage = new ActionsPage(driver);
+        seleniumActions = new SeleniumActions(driver);
     }
     @FindBy(xpath = "//a[@class='action towishlist']/span")
     WebElement wishListButton;
@@ -55,7 +54,7 @@ public class AddingPricePage {
         WebElement itempriceName = driver.findElement(By.xpath("//span[contains(text(),'"+maxValue+"')]/../../../../strong[@class='product name product-item-name']"));
         String pricename = itempriceName.getText();
         System.out.println(pricename);
-        actionsPage.clickOnElement(itempriceName);
+        seleniumActions.clickOnElement(itempriceName);
 
 
 
@@ -63,7 +62,7 @@ public class AddingPricePage {
 
     public void addingtowishList()
     {
-        actionsPage.waitAndClickOnElement(wishListButton);
+        seleniumActions.waitAndClickOnElement(wishListButton);
     }
 
     public String getwishListName()
@@ -71,7 +70,7 @@ public class AddingPricePage {
         return priceText.getText();
     }
     public void clickOnCartButton(){
-        actionsPage.clickOnElement(addToCartButton);
+        seleniumActions.clickOnElement(addToCartButton);
 
 
     }

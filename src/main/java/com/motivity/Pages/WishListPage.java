@@ -1,6 +1,6 @@
 package com.motivity.Pages;
 
-import com.motivity.BasePage.ActionsPage;
+import com.motivity.FrameworkActions.SeleniumActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,11 +8,11 @@ import org.openqa.selenium.support.PageFactory;
 
 public class WishListPage {
     WebDriver driver;
-    ActionsPage actionsPage;
+    SeleniumActions seleniumActions;
     public WishListPage(WebDriver driver){
         PageFactory.initElements(driver,this);
         this.driver = driver;
-        actionsPage = new ActionsPage(driver);
+        seleniumActions = new SeleniumActions(driver);
     }
 
     @FindBy(xpath = "//div[@class='message info empty']/span")
@@ -28,7 +28,7 @@ public class WishListPage {
         return noItemsMessage.getText();
     }
     public void clickingOnCart(){
-        actionsPage.clickOnElement(myCartButton);
-        actionsPage.waitAndClickOnElement(proceedAndCheckOutButton);
+        seleniumActions.clickOnElement(myCartButton);
+        seleniumActions.waitAndClickOnElement(proceedAndCheckOutButton);
     }
 }

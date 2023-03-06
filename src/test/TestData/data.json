@@ -1,9 +1,15 @@
 {
   "email": "tanuja.bommu12@gmail.com",
   "password": "Tanuja@12,",
+  "priceName": "Impulse Duffle",
+  "wishlistMessage": "You have no items in your wish list.",
   "StreetAddress": "2-44b,mainroad,2nd block",
+  "Zipcode": "12345",
+  "phone": "123456789",
   "City": "Dallas",
   "State": "Texas",
-  "country": "unites States"
+  "country": "unites States",
+  "orderDate": "February 28, 2023",
+  "price": "$7.00"
 
 }

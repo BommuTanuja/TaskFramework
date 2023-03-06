@@ -1,6 +1,6 @@
 package com.motivity.Pages;
 
-import com.motivity.BasePage.ActionsPage;
+import com.motivity.FrameworkActions.SeleniumActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,12 +9,12 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ShippingAddressPage {
     WebDriver driver;
-    ActionsPage actionsPage;
+    SeleniumActions seleniumActions;
     public ShippingAddressPage(WebDriver driver)
     {
         PageFactory.initElements(driver,this);
         this.driver = driver;
-        actionsPage = new ActionsPage(driver);
+        seleniumActions = new SeleniumActions(driver);
 
     }
 
@@ -39,27 +39,40 @@ public class ShippingAddressPage {
     WebElement orderButton;
     @FindBy(xpath = "//a[@class='order-number']")
     WebElement orderNumberButton;
+    @FindBy(xpath = "//span[contains(text(),'Order Date')]")
+    WebElement orderDateLabel;
+    @FindBy(xpath = "//span[@class='cart-price']/span[@class='price']")
+    WebElement finalProduct;
 
-//    public void givingStreetAddress(String addressLine,String city,String zipcode,String phoneNumber) throws InterruptedException {
-//
-//        streetAddressLabel.sendKeys(addressLine);
-//        cityLabel.sendKeys(city);
-//
-//        Select selectState = new Select(stateLabel);
-//        selectState.selectByVisibleText("Texas");
-//        postalCodeLabel.sendKeys(zipcode);
-//        phoneLabel.sendKeys(phoneNumber);
-//        actionsPage.clickOnElement(nextButton);
-//
-//    }
-    public void clickOnNextButton(){
-        actionsPage.clickOnElement(radioButton);
-        actionsPage.clickOnElement(nextButton);
+   public void givingStreetAddress(String addressLine,String city,String zipcode,String phoneNumber) throws InterruptedException {
+         try{
+        streetAddressLabel.sendKeys(addressLine);
+        cityLabel.sendKeys(city);
+
+        Select selectState = new Select(stateLabel);
+        selectState.selectByVisibleText("Texas");
+        postalCodeLabel.sendKeys(zipcode);
+        phoneLabel.sendKeys(phoneNumber);
+        }
+         catch (Exception e){
+             seleniumActions.clickOnElement(radioButton);
+             seleniumActions.clickOnElement(nextButton);
+
+         }
 
     }
+
     public void clickOnPlaceOrder(){
-        actionsPage.clickOnElement(orderButton);
-        actionsPage.clickOnElement(orderNumberButton);
+        seleniumActions.clickOnElement(orderButton);
+        seleniumActions.clickOnElement(orderNumberButton);
+    }
+
+    public String getOrderDate(){
+        return orderDateLabel.getText();
+    }
+
+    public String getFinalPrice(){
+        return finalProduct.getText();
     }
 
 

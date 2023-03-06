@@ -1,26 +1,33 @@
-package com.motivity.BasePage;
+package com.motivity.FrameworkActions;
 
+import com.motivity.FrameworkWaits.SeleniumWaits;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
-public class ActionsPage {
+public class SeleniumActions {
     WebDriver driver;
-    WaitsPage waitsPage;
-    public ActionsPage(WebDriver driver){
+    SeleniumWaits seleniumWaits;
+    public SeleniumActions(WebDriver driver){
         this.driver = driver;
-        waitsPage = new WaitsPage(driver);
+        seleniumWaits = new SeleniumWaits(driver);
     }
-
+        /**
+         *  wait and click on element
+        *
+        */
     public boolean waitAndClickOnElement(WebElement element){
         try{
-           waitsPage .waitForElementToBeClickable(element).click();
+            seleniumWaits .waitForElementToBeClickable(element).click();
             return true;
         }catch (Exception e){
 
             return false;
         }
     }
+
+    /**
+     *  click on element
+     */
     public void clickOnElement(WebElement element) {
         try {
             element.click();
@@ -29,14 +36,7 @@ public class ActionsPage {
         }
     }
 
-    public void moveToElement(WebElement element){
-        try{
-            element.click();
 
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
 
 
 }

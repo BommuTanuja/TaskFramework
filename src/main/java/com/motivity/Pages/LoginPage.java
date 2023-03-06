@@ -1,6 +1,6 @@
 package com.motivity.Pages;
 
-import com.motivity.BasePage.ActionsPage;
+import com.motivity.FrameworkActions.SeleniumActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,12 +8,12 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
     WebDriver driver;
-    ActionsPage actionsPage;
+    SeleniumActions actionsPage;
 
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
-        actionsPage = new ActionsPage(driver);
+        actionsPage = new SeleniumActions(driver);
 
     }
     @FindBy(xpath = "(//li[@class='authorization-link']/a)[1]")

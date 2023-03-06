@@ -1,18 +1,20 @@
 package com.motivity.SuccessfulTests;
 
 
-import com.motivity.BasePage.WebPage;
+import com.motivity.Automation.BasePage;
 import com.motivity.DataManager.ReadDataFromJson;
 import com.motivity.Pages.*;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 
 
-public class MagentoTest extends WebPage {
+public class MagentoTest extends BasePage {
     public LoginPage loginPage;
     public HomePage homePage;
     public AddingPricePage addingPricePage;
@@ -22,7 +24,7 @@ public class MagentoTest extends WebPage {
 
 
 
-    @BeforeTest
+    @BeforeClass
     public void initializeThePage(){
     loginPage = new LoginPage(driver);
     homePage = new HomePage(driver);
@@ -36,27 +38,37 @@ public class MagentoTest extends WebPage {
     @Test
     public void verifyingTheTests() throws InterruptedException {
 
-        readDataFromJson.readValueFromJson("email");   // json
 
-        loginPage.login("tanuja.bommu12@gmail.com","Tanuja@12");
+        loginPage.login(readDataFromJson.readValueFromJson("email"),
+                readDataFromJson.readValueFromJson("password"));
         homePage.clickOnGear();
-        homePage.verificationofCart();
+        homePage.verificationOfCart();
         String actualTitle = homePage.getTheCartText();
-        Assert.assertEquals(actualTitle,"You have no items in your shopping cart.");
+        String expectedTitle ="You have no items in your shopping cart.";
+        Assert.assertEquals(actualTitle,expectedTitle);
         System.out.println(actualTitle);
         homePage.closeTheCart();
         Thread.sleep(1000);
         addingPricePage.getHighestprice();
         addingPricePage.addingtowishList();
         String nameToBePresentOnWishList = addingPricePage.getwishListName();
-        Assert.assertEquals(nameToBePresentOnWishList,"Impulse Duffle");
+        Assert.assertEquals(nameToBePresentOnWishList,readDataFromJson.readValueFromJson("priceName"));
         addingPricePage.clickOnCartButton();
         String message = wishListPage.getThemessagefromePage();
-        Assert.assertEquals(message,"You have no items in your wish list.");
+        Assert.assertEquals(message,readDataFromJson.readValueFromJson("wishlistMessage"));
         wishListPage.clickingOnCart();
-        // shippingAddressPage.givingStreetAddress("2-44b,main road,2nd block","Dallas","12345","1234567891");
-        shippingAddressPage.clickOnNextButton();
+        shippingAddressPage.givingStreetAddress(readDataFromJson.readValueFromJson("StreetAddress"),
+                    readDataFromJson.readValueFromJson("City"),readDataFromJson.readValueFromJson("Zipcode")
+                 ,readDataFromJson.readValueFromJson("phone"));
+       // shippingAddressPage.clickOnNextButton();
         shippingAddressPage.clickOnPlaceOrder();
+        String actualDate = shippingAddressPage.getOrderDate();
+        Assert.assertEquals(actualDate,readDataFromJson.readValueFromJson("orderDate"));
+        String actualFinalPrice = shippingAddressPage.getFinalPrice();
+        Assert.assertEquals(actualFinalPrice,readDataFromJson.readValueFromJson("price"));
+
+
+
 
 
     }
